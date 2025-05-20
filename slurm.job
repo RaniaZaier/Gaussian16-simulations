@@ -1,0 +1,74 @@
+*** SLURM_SUBMIT file to submit the Gaussian16 job on HPC ***
+#!/bin/bash
+#SBATCH -J d3-2
+#SBATCH -e std.hpc.%j.err
+#SBATCH -o std.hpc.%j.out
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=28
+#SBATCH -p name-cluster
+#SBATCH -A number-project
+#SBATCH -t 160:0:0
+#SBATCH --mem=25G
+
+
+# Set the name of your input file :
+INPUT=d3-2-opt.gjf
+
+# Load environment
+module load apps/gaussian/g16.A.01
+
+# Get number of shared processors
+if [ -n "$SLURM_CPUS_PER_TASK" ] ; then
+    CORES=$SLURM_CPUS_PER_TASK
+else
+    CORES=1
+fi
+
+# Adjust your input file :
+perl -i -pe "s/%nprocshared=.*/%nprocshared=$CORES/" $INPUT
+perl -i -pe "s/%nproc=.*/%nproc=$CORES/" $INPUT
+
+# Set output file name based on input file name :
+OUTPUT="${INPUT%.*}.log"
+
+# ${SLURM_SUBMIT_DIR} -> Repertoire du fichier pbs (sur /home/permanent/amartel/allylboronate/CD)
+
+WRKDIR="/lu/topola/temp/rania/gauss_scrdir/r_opt/d3"
+
+# Recuperation du nom du fichier chk
+chkfile=$(grep '%chk=' ${INPUT} | cut -d'=' -f2)
+echo "echo ${chkfile}:"
+echo ${chkfile}
+
+
+# Création du champ file
+files=(${INPUT} ${chkfile})
+echo "files:"
+echo $files
+
+#echo ${files[@]}
+
+#Creation du rep de travail sur le noeud de calcul
+mkdir -p ${WRKDIR}
+
+#Utilisation du WRKDIR comme Scratch Gaussian
+export GAUSS_SCRDIR=${WRKDIR}
+
+# Copy sur disque machine de travail
+cp ${files[@]} ${WRKDIR}/.
+
+# Va dans le repertoire de travail
+cd ${WRKDIR}
+
+# Execution
+g16 < $INPUT > $OUTPUT
+
+# Recuperation des fichiers de sortie du noeud de calcul vers frontale
+#cp ${files[@]} ${SLURM_SUBMIT_DIR}/.
+#cp ${OUTPUT} ${SLURM_SUBMIT_DIR}/.
+
+# Nettoyage 
+
+#rm ${files[@]}
+#rm ${OUTPUT}
+
