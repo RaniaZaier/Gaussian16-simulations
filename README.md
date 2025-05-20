@@ -1,6 +1,6 @@
 # Gaussian16-simulations
 
-# Data and code for "Effect of benzothiadiazole-based π-spacers on fine-tuning of optoelectronic properties of oligothiophene-core donor materials for efficient organic solar cells: a DFT study."
+# Data and code instructions for "Effect of benzothiadiazole-based π-spacers on fine-tuning of optoelectronic properties of oligothiophene-core donor materials for efficient organic solar cells: a DFT study."
 
 **doi.org/10.1021/acs.jpca.3c04866**
 
