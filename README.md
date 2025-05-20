@@ -7,7 +7,7 @@
 ## Contents
 
 * *data-{type}/*: reproducible data
-* *job.job : to submit a gaussion job
+* *slurm.job : to submit a gaussion job
 
 ## Description of the data
 
