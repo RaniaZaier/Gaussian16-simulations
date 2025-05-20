@@ -54,10 +54,10 @@ the following steps (in *bash* shell):
    * Put the .fchk file of the gs calculation in the command window of the open source Multiwfn software and follow the sturcture in Section 4.10.1 in the manual
       ** the output generates .chk file which is transformed to .fchk file : formchk .chk .fch **
 5. TDM calculations:
-   *    * Requires finished ground-state calculation
+   *  Requires finished ground-state calculation
     * Set up the TD-DFT calculaton parameters as necessary
     ** # td=(nstates=6) wb97xd/6-311+g(d,p) scrf=(smd,solvent=chloroform)
       guess=read density transition=1 iop(6/8=3) out=wfn **
-    * Put the .fchk file of the gs calculation in the command window of the open source Multiwfn software and follow the sturcture in Section 4.18.8 in the manual
+   * Put the .fchk file of the gs calculation in the command window of the open source Multiwfn software and follow the sturcture in Section 4.18.8 in the manual
 6. EDD calculation:
    * Edd plots are plotted based on the es.wfn and gs.wfn following Section 4.18.1 in the manual
