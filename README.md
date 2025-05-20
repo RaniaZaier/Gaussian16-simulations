@@ -11,7 +11,7 @@
 
 ## Description of the data
 
-The data are organized in subdirectories *data-{type}/{system}/* corresponding to
+The main data corresponding to the best structures are organized in subdirectories *data-{type}/{system}/* corresponding to
 the considered molecules and simulation type:
 
 * data-gs: Ground state calculations
